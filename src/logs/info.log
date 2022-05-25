@@ -135,3 +135,4 @@
 {"level":"info","message":"User logged out --> path: /logout || method: POST"}
 {"level":"info","message":"User logged out --> path: /logout || method: GET"}
 {"level":"info","message":"User visited the login page --> path: /login || method: GET"}
+{"level":"info","message":"User visited the login page --> path: /login || method: GET"}

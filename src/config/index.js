@@ -5,7 +5,7 @@ require('dotenv').config();
 let args = yargs
     .default({
         "MODE": "FORK",
-        "PORT": 8000,
+        "PORT": 8080,
     })
     .alias({
         m: "MODE",
