@@ -354,7 +354,7 @@ if (args.MODE === "CLUSTER" && cluster.isMaster) {
         cluster.fork();
     })
 } else {
-    const server = httpServer.listen(args.PORT, () => {
+    const server = httpServer.listen(args.PORT, '0.0.0.0', () => {
         console.log(`Server on http://localhost:${args.PORT} || Worker: ${process.pid} || Date: ${new Date()}`);
     })
 
