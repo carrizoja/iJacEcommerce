@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@200&family=Urbanist:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap');
+.productcard {
+    width: 200px;
+    height: 250px;
+    border: 1px solid black;
+    box-shadow: 10px 7px 20px #000;
+    border-radius: 5px;
+    margin-bottom: 25px;
+}
+
+.productcard:hover {
+    box-shadow: 15px 10px 30px #000;
+    transform: scale(1.1);
+}
+
+.productcard>img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.productContainer {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.form-control {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+
+body {
+    text-align: center;
+}
+
+#userForm {
+    margin: 0 auto;
+    border-radius: 5px;
+    background: linear-gradient(#e66465, #9198e5);
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.btn-primary {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.chatStyle {
+    background: linear-gradient(#e66465, #9198e5);
+}
+
+.title {
+    font-family: 'Urbanist', sans-serif;
+}
+
+.form-title {
+    font-family: 'Urbanist', sans-serif;
+}
+
+
+/* Form Styles */
+
+.formStyle {
+    width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+
+/* Button Style */
+
+.buttonStyle {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+/* Form Logout */
+
+.formLogOutStyle {
+    justify-content: center;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+/* Button LogOut */
+
+.buttonLogOutStyle {
+    width: 200px;
+    background-color: #dd3c0b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+/* Textbox Styles */
+
+.textBoxStyle {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
