@@ -11,7 +11,8 @@
         "dev": "nodemon src/app.js -p 8080",
         "test": "mocha test/apiresful.test.js",
         "build-css": "node-sass --include-path scss src/public/scss/styles.scss src/public/styles.css",
-        "watch-css": "nodemon -e scss -x \"npm run build-css\""
+        "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+        "heroku-postbuild": "cd app && cd client && npm install --only=dev && npm install && npm run build"
     },
     "keywords": [],
     "author": "",
