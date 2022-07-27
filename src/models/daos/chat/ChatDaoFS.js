@@ -1,4 +1,4 @@
-const FSContainer = require('../../containers/FSContainer');
+const FSContainer = require('../../containers/FSContainer.js');
 const ChatDto = require('../../dtos/ChatDto');
 const path = require('path')
 const chatsPath = path.join('files', 'chats.json')
