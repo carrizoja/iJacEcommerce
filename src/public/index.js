@@ -1,3 +1,5 @@
+/* const { post } = require("../routes/processRoutes"); */
+
 const socket = io();
 let username;
 let productosEnCarrito;
@@ -5,19 +7,25 @@ let productosEnCarrito;
 
 fetch('/profNameDisabled').then(res => res.json()).then(data => {
     username = data.username
+    dataUserFetch = data;
+
     const renderize = () => {
         let html = ""
         html += ` 
-        <input class="buttonLogOutStyle" type="submit" value="Logout ${username} " id="logOutButton">
+        <input class="buttonLogOutStyle" type="submit" value="Logout ${dataUserFetch.username} " id="logOutButton">
         `
         document.getElementById("logOutForm").innerHTML = html
+        if (dataUserFetch.admin == true) {
+            const productForm = document.getElementById('productFormContainer');
+            productForm.style.display = 'block';
+        }
     }
     renderize();
 
 })
 
 socket.on('productLog', (data) => {
-    let products = data.payload;
+    let products = data;
     let productsTemplate = document.getElementById("productsTemplate");
     fetch('templates/newestProducts.handlebars').then(response => {
         return response.text();
@@ -72,8 +80,8 @@ socket.on('productLog', (data) => {
 
             } else {
                 document.querySelector('.checkout').classList.add('hidden');
-                elementoPadre.innerHTML = `<center><h2 class="empty" style="font-family: SUNN-line-regular;
-    src: url('../assets/fonts/menu/SUNN-Line-Regular.woff')"> Tu Carrito está vacío </h2></center>`;
+                elementoPadre.innerHTML = `<center><h2 class="empty" style="font-family: Roboto;
+    "> Your Cart is empty </h2></center>`;
                 sumaPrecioCarrito.innerHTML = '';
             }
         }
@@ -163,36 +171,13 @@ socket.on('productLog', (data) => {
         cerrarCarritoCompras.addEventListener('click', cerrarCarrito);
         overlay.addEventListener('click', cerrarCarrito);
 
-        function confirmarCompra() {
 
 
-            cerrarCarrito();
-            Swal.fire({
-                title: '¿Desea confirmar la compra?',
-                showDenyButton: true,
-                confirmButtonText: 'Confirmar',
-                denyButtonText: `Cancelar`,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire('¡Comprado!', '', 'success')
-                    productosEnCarrito = [];
-                    actualizarCarritoHTML();
-                } else if (result.isDenied) {
-                    Swal.fire('Compra cancelada', '', 'info')
-                }
-            })
-
-
-
-
-        }
 
 
     })
 
 })
-
-
 
 
 
@@ -204,7 +189,7 @@ socket.on('newUser', (data) => {
         icon: "success",
         text: "Usuario nuevo conectado",
         toast: true,
-        position: "top-right"
+        position: "bottom-right"
     });
 })
 
@@ -216,14 +201,13 @@ socket.on('userLog', (data) => {
 chatBox.addEventListener('keyup', (evt) => {
     if (evt.key === "Enter") {
         if (chatBox.value.trim().length > 0) { // Trim saca espacios
-            socket.emit('message', { nickname: nickname, message: chatBox.value.trim() })
+            socket.emit('message', { username: username, message: chatBox.value.trim() })
             chatBox.value = "";
         }
     }
 })
 
 socket.on('log', data => {
-
     let log = document.getElementById('log');
     let messages = "";
     data.forEach(message => {
@@ -236,11 +220,52 @@ socket.on('normalizedData', data => {
     let log = document.getElementById('log');
     // denormalization process with normalizr
     const author = new normalizr.schema.Entity('author');
-    const mesagges = new normalizr.schema.Entity('mesagges', {
+    const messages = new normalizr.schema.Entity('messages', {
         author: author,
     });
-    let denormalizedData = new normalizr.denormalize(data.result, [mesagges], data.entities);
+    let denormalizedData = new normalizr.denormalize(data.result, [messages], data.entities);
     console.log(`Longitud total de la data normalizada: ${JSON.stringify(data,null,'\t').length}`);
-    console.log(`Porcentaje de reducción: ${(JSON.stringify(mesagges,null,'\t').length - JSON.stringify(data,null,'\t').length)/JSON.stringify(mesagges,null,'\t').length*100}%`)
+    console.log(`Porcentaje de reducción: ${(JSON.stringify(messages,null,'\t').length - JSON.stringify(data,null,'\t').length)/JSON.stringify(messages,null,'\t').length*100}%`)
 
 })
+
+function confirmPurchase() {
+
+    purchaseDetail = JSON.parse(localStorage.getItem('carritoCompras'));
+    console.log(purchaseDetail);
+    console.log(username);
+    socket.emit('purchase', purchaseDetail);
+    socket.emit('userData', username);
+
+    /* window.location.href = '/purchase'; */
+
+    /* console.log(productosEnCarrito);
+    socket.emit('purchase', productosEnCarrito); */
+    /*   Swal.fire({
+          title: '¿Desea confirmar la compra?',
+          showDenyButton: true,
+          confirmButtonText: 'Confirmar',
+          denyButtonText: `Cancelar`,
+      }).then((result) => {
+          if (result.isConfirmed) {
+              purchaseDetail = JSON.parse(localStorage.getItem('carritoCompras'));
+              console.log(purchaseDetail);
+              socket.emit('purchase', purchaseDetail);
+              post('/purchase', purchaseDetail);
+              productosEnCarrito = [];
+              localStorage.clear();
+              Swal.fire('¡Comprado!', '', 'success')
+
+
+          } else if (result.isDenied) {
+              productosEnCarrito = [];
+              localStorage.clear();
+              Swal.fire('Compra cancelada', '', 'info')
+
+          }
+      }) */
+
+
+
+
+}
