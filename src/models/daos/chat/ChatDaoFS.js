@@ -32,6 +32,23 @@ class ChatDaoFS extends FSContainer {
         }
     }
 
+    async getChatsByUsername(username) {
+        try {
+            // search for all chats with the username
+            const results = await super.getAll();
+            const chats = results.filter(chat => {
+                return chat.username === username;
+            })
+            const dtos = chats.map(chat => {
+                return new ChatDto(chat);
+            });
+
+            return dtos;
+        } catch (error) {
+            console.log("Error getAll() on CartsDaoFS", error);
+        }
+    }
+
     async disconnect() {
 
     }

@@ -57,6 +57,10 @@ class MongoDBContainer {
 
         return await this.model.findByIdAndUpdate(idCart, { $pull: { products: idProduct } });
     }
+
+    async getChatsByUsername(username) {
+        return await this.model.find({ username: username });
+    }
 }
 
 

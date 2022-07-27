@@ -6,7 +6,7 @@ const { Server: IOServer } = require('socket.io');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const { productsDao, chatDao, cartDao } = require('./models/daos')
+const { productsDao, chatDao } = require('./models/daos')
 const { args } = require('./config');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
