@@ -67,6 +67,7 @@ const productRouter = require('./routes/productRoutes');
 const generalRouter = require('./routes/generalRoutes');
 const cartRouter = require('./routes/cartRoutes');
 const chatRouter = require('./routes/chatRoutes');
+const orderRouter = require('./routes/orderRoutes');
 
 app.use('/', generalRouter);
 app.use('/', express.static(publicPath));
@@ -76,6 +77,7 @@ app.use('/faker', fakerRouter);
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use('/api/chats', chatRouter);
+app.use('/api/orders', orderRouter);
 
 
 // ------------------------------------ End Routes -----------------------------------

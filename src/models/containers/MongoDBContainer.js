@@ -32,6 +32,10 @@ class MongoDBContainer {
 
     }
 
+    async getProductsByCategory(category) {
+        return await this.model.find({ category: category });
+    }
+
     async save(object) {
         object.timestamp = TimeTools.getTimestamp();
         return await this.model.create(object);
@@ -59,6 +63,10 @@ class MongoDBContainer {
     }
 
     async getChatsByUsername(username) {
+        return await this.model.find({ username: username });
+    }
+
+    async getOrderByUsername(username) {
         return await this.model.find({ username: username });
     }
 }
