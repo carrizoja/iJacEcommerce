@@ -101,7 +101,6 @@ app.post('/purchase', async(req, res) => {
     res.sendFile(path.join(publicPath, '/pages/purchase.html'));
 
 })
-
 app.use(serverMw.routeNotImplemented);
 // ----------------------------------End Endpoints ------------------------------------------------------
 // ---------------------------------- Start Sockets -----------------------------------------------------
